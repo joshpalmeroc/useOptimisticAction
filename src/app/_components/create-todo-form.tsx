@@ -12,7 +12,13 @@ import { toast } from 'sonner';
 import { useEffect } from 'react';
 
 const CreateTodoForm = () => {
-	const { execute, result, status } = useAction(createTodo);
+	const { execute, result, status } = useAction(createTodo, {
+		onSuccess: () => {
+			toast.success('Todo created');
+			setFocus('title');
+			reset();
+		},
+	});
 	const {
 		register,
 		handleSubmit,
@@ -22,14 +28,6 @@ const CreateTodoForm = () => {
 	} = useForm<z.infer<typeof schema>>({
 		resolver: zodResolver(schema),
 	});
-
-	useEffect(() => {
-		if (status === 'hasSucceeded') {
-			toast.success('Todo created!');
-			setFocus('title');
-			reset();
-		}
-	}, [status, reset, setFocus]);
 
 	return (
 		<>
