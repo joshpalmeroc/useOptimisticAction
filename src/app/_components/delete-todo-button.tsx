@@ -1,6 +1,6 @@
 'use client';
 
-import { deleteTodo } from '@/actions/todo';
+import { deleteTodo } from '@/actions/todo/actions';
 import { Button } from '@/components/ui/button';
 import { useAction } from 'next-safe-action/hooks';
 import { useEffect } from 'react';
